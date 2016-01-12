@@ -13,7 +13,7 @@
     UIView *containerView;
     
     
-    NSMutableArray *lastAnimation;
+    NSMutableArray *lastAnimation; // array for maintaing the record of last animation applied
     
     IBOutlet NSLayoutConstraint *leadingConstraint2;
     IBOutlet NSLayoutConstraint *leadingConstraint3;
@@ -337,8 +337,16 @@ static NSString *constantShakeEffect=@"shakeEffect";
  
 }
 
+/* simple Change Position Animation */
 - (IBAction)animationType1:(id)sender {
     [lastAnimation addObject:[NSNumber numberWithInt:1]];
+    
+    
+    
+    //duration:- the time you want your total animation should work.
+    //delay:- delay of particular time is added to animation
+    //When dampingRatio is 1, the animation will smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will oscillate more and more before coming to a complete stop
+    //initial spring velocity:- velocity at which the animation will start
     
     [UIView animateWithDuration:2 delay:0.1 usingSpringWithDamping:1 initialSpringVelocity:.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
         _detailDescriptionLabel.center=self.view.center;
@@ -347,8 +355,16 @@ static NSString *constantShakeEffect=@"shakeEffect";
     }];
     
 }
+
+/* Bouncy & Damping Change Position Animation */
 - (IBAction)animationType2:(id)sender {
     [lastAnimation addObject:[NSNumber numberWithInt:2]];
+    
+    
+    //duration:- the time you want your total animation should work.
+    //delay:- delay of particular time is added to animation
+    //When dampingRatio is 1, the animation will smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will oscillate more and more before coming to a complete stop
+    //initial spring velocity:- velocity at which the animation will start
     
     [UIView animateWithDuration:2 delay:.1 usingSpringWithDamping:0.4
           initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -359,25 +375,31 @@ static NSString *constantShakeEffect=@"shakeEffect";
     
 }
 
+/* Animation for adding a view to another view */
 - (IBAction)animationType3:(id)sender {
     
     [lastAnimation addObject:[NSNumber numberWithInt:3]];
     
     [self.view addSubview:containerView];
     
+    //creating view
     UIView *fromView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height)];
     fromView.backgroundColor = [[UIColor greenColor]colorWithAlphaComponent:0.5];
     
+    //preparing view
     [containerView addSubview:fromView];
-    
     containerView.alpha=0;
+    
+    //simple fade in animation
     [UIView animateWithDuration:0.33 animations:^{
         
         containerView.alpha=1;
+        
     }completion:^(BOOL finished){
         
         //removingView :- fromView
         //below options are given
+        
         [UIView transitionFromView:fromView toView:CheckerBoardview duration:2 options:UIViewAnimationOptionTransitionCurlUp completion:^(BOOL finished){
             
         }];
@@ -396,6 +418,9 @@ static NSString *constantShakeEffect=@"shakeEffect";
     //    UIViewAnimationOptionTransitionFlipFromBottom
     
 }
+
+
+/* animation On corner Radius with transformation */
 - (IBAction)animationType4:(id)sender {
     
     [lastAnimation addObject:[NSNumber numberWithInt:4]];
@@ -442,7 +467,7 @@ static NSString *constantShakeEffect=@"shakeEffect";
 }
 
 
-
+/* shake Animation  */
 - (IBAction)animationType5:(id)sender {
 
     [lastAnimation addObject:[NSNumber numberWithInt:5]];
@@ -470,7 +495,7 @@ static NSString *constantShakeEffect=@"shakeEffect";
     [_detailDescriptionLabel.layer addAnimation:group forKey:constantShakeEffect];
 }
 
-
+/* borderColor & border With animation */
 - (IBAction)animationType6:(id)sender {
     
     [lastAnimation addObject:[NSNumber numberWithInt:6]];
