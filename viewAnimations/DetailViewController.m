@@ -1,4 +1,10 @@
-
+//
+//  DetailViewController.m
+//  viewAnimations
+//
+//  Created by Himanshu Khatri on 1/11/16.
+//  Copyright © 2016 bd 001. All rights reserved.
+//
 
 #import "DetailViewController.h"
 
